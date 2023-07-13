@@ -74,7 +74,7 @@ Run this Command:
 
 ```sh
   cd my-folder
-  git clone git@github.com:Errytagedesign/microverse-portfolio.git
+  git clone https://github.com/Errytagedesign/microverse-todo-app
 ```
 
 ### Install
@@ -83,7 +83,7 @@ First you need to install the node package files
 Run this command:
 
 ```sh
-  cd microverse-portfolio
+  cd microverse-todo-app
   npm install
 ```
 

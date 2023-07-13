@@ -4,9 +4,9 @@ import './index.css';
 const displayList = document.querySelector('.todoList');
 
 const toDoList = [
-  { description: 'Read About Express.js', completed: false, index: 0 },
-  { description: 'Clean the home office', completed: false, index: 1 },
-  { description: 'Complete 1000 steps walk', completed: true, index: 2 },
+  { description: 'Read About Express.js', completed: false, index: 1 },
+  { description: 'Clean the home office', completed: false, index: 2 },
+  { description: 'Complete 1000 steps walk', completed: true, index: 3 },
 ];
 
 const input = document.createElement('input');
