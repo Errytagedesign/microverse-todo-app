@@ -22,7 +22,7 @@
 - [🙏 Acknowledgements](#acknowledgements)
 - [📝 License](#license)
 
-# 📖 Hello Microverse Project <a name="about-project"></a>
+# 📖 A Todo List Projects with Webpack <a name="about-project"></a>
 
 A Todo list project developed with webpack and the best combo of HTML,CSS and JAVASCRIPT. In addition, i added Linters for Html,Css and Javascript.
 
