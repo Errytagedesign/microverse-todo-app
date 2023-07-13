@@ -56,15 +56,6 @@ A Todo list project developed with webpack and the best combo of HTML,CSS and JA
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- LIVE DEMO -->
-
-## 🚀 Live Demo <a name="live-demo"></a>
-
-<a href="https://communitypro-meets.netlify.app/">Live Demo Link</a>
-<a href="https://errytagedesign.github.io/communitypro/">Live Demo Link</a>
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- GETTING STARTED -->
 
 ## 💻 Getting Started <a name="getting-started"></a>
