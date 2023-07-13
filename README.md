@@ -1,12 +1,6 @@
 <a name="readme-top"></a>
 
-<div align="center">
-  <img src="/assets/images/communitypro-logo.png" alt="logo" width="140"  height="auto" />
-  <br/>
-
-  <h3><b>Community Pro Tech Meets Events Project</b></h3>
-
-</div>
+  <h3><b>Todo List Porject</b></h3>
 
 # 📗 Table of Contents
 
@@ -14,7 +8,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -31,7 +24,7 @@
 
 # 📖 Hello Microverse Project <a name="about-project"></a>
 
-A Tech events Project developed with the best combo of HTML,CSS and JAVASCRIPT. In addition, i added Linters for Html,Css and Javascript.
+A Todo list project developed with webpack and the best combo of HTML,CSS and JAVASCRIPT. In addition, i added Linters for Html,Css and Javascript.
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -47,6 +40,7 @@ A Tech events Project developed with the best combo of HTML,CSS and JAVASCRIPT. 
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML">HTML</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS">CSS</a></li>
     <li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JS</a></li>
+    <li><a href="https://webpack.js.org/guides/getting-started/#basic-setup">webpack</a></li>
   </ul>
 </details>
 
@@ -55,15 +49,10 @@ A Tech events Project developed with the best combo of HTML,CSS and JAVASCRIPT. 
 ### Key Features <a name="key-features"></a>
 
 - Add index.html file.
-- Add about.html file.
-- Add style.css file.
 - Add index.js file.
+- Add index.css file.
 - Add Linters.
-- Add Header to the index.html file.
-- Add Hero section to the index.html file.
-- Add global styling variables to style.html file.
-- Add Programs section to the index.html file.
-- Add more styles to the styles.css file.
+- Add Webpack config.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -153,7 +142,7 @@ I have added the linters or tests in order to avoid anykind of typos and ensure 
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] Add More Speakers
+- [ ] Add Funtionalities
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -180,9 +169,6 @@ If you like this project just give it a star -
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
 I would like to thank Microverse.
-
-- This project was based on the design by [Cindy Shin](https://www.behance.net/adagio07) in [Behance](https://www.behance.net/gallery/29845175/CC-Global-Summit-2015).
-- The design is licensed under the [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
