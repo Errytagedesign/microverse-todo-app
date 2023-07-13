@@ -90,7 +90,8 @@ Run this command:
 ### Usage
 
 - In order to use this project you either create branch to add more features.
-- But in order to run the project open index.html with live server
+- But in order to run the project run npm start
+- Run npm run build when you're done.
 
 ### Run Linters
 
