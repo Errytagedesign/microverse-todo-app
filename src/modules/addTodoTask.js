@@ -1,71 +1,3 @@
-// class TodoTask {
-//   constructor(task, index = toDoList.length, description = false) {
-//     this.task = task;
-//     this.index = index;
-//     this.description = description;
-//   }
-
-const { indexOf } = require('lodash');
-
-//   saveTasks = () => {
-//     const inputList = document.querySelector('.taskInput');
-//     const inputValue = inputList.value.trim();
-//     if (inputValue) {
-//       const pushVal = new TodoTask(inputValue, toDoList.length, false);
-//       toDoList.push(pushVal);
-//       inputList.value = '';
-//       this.saveToLocalStorage();
-//     }
-//   };
-
-//   addTasks = () => {
-//     displayList.innerHTML = '';
-//     for (let i = 0; i < toDoList.length; i += 1) {
-//       displayList.innerHTML += `
-
-//           <div  class="todos">
-//             <div class="check-div design">
-//               <input type="checkbox" id="${toDoList[i].index}" name="list${toDoList[i]}" value="list" />
-//               <label for="list${toDoList[i]}">${toDoList[i].task}</label>
-//             </div>
-//             <div class="toggleIcon">
-//             <i id="${toDoList[i].index}"  class="fa-solid fa-trash-can hideDelete"></i>
-//               <i class="fa-solid fa-ellipsis-vertical toggle" data-index="${i}"></i>
-//             </div>
-//           </div>
-
-//       `;
-//     }
-//   };
-
-//   removeTask = (index) => {
-//     toDoList.splice(index, 1);
-//     this.updateIndexes();
-//     this.saveToLocalStorage();
-//     this.addTasks();
-//     this.loadFromLocalStorage();
-//   };
-
-//   updateIndexes = () => {
-//     for (let i = 0; i < toDoList.length; i += 1) {
-//       toDoList[i].index = i;
-//     }
-//   };
-
-//   saveToLocalStorage = () => {
-//     localStorage.setItem('toDoList', JSON.stringify(toDoList));
-//   };
-
-//   loadFromLocalStorage = () => {
-//     const toDoListJson = localStorage.getItem('toDoList');
-//     if (toDoListJson) {
-//       toDoList = JSON.parse(toDoListJson);
-//     }
-//   };
-// }
-
-// export default TodoTask;
-
 const displayList = document.querySelector('.todoList');
 
 // Initialize the to-do list array
@@ -110,7 +42,7 @@ const deleteTask = (index) => {
 // Function to edit a task description
 const editTaskDescription = (index, newDescription) => {
   // Update the description of the task at the specified index
-  toDoList[index].task = newDescription;
+  toDoList[index].description = newDescription;
 
   // Save changes to local storage
   saveToLocalStorage();
@@ -119,7 +51,6 @@ const editTaskDescription = (index, newDescription) => {
 // Function to update the indexes of tasks
 const updateIndexes = () => {
   for (let i = 0; i < toDoList.length; i++) {
-    console.log(i);
     toDoList[i].index = i;
   }
 };
@@ -138,7 +69,6 @@ const loadFromLocalStorage = () => {
 };
 
 // Render Task to window
-
 const renderTask = () => {
   const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
 
@@ -146,14 +76,15 @@ const renderTask = () => {
     const showTask = storedTasks.map(
       (task) => ` <div  class="todos">
      <div class="check-div design">
-     <input type="checkbox" id="${task.index}" name="list${task.description}" value="list" />
-     <label for="list${task.description}">${task.description}</label>
-     </div>
-     <div class="toggleIcon">
-     <i id="${task.index}"  class="fa-solid fa-trash-can hideDelete"></i>
-     <i id="${task.index}" class="fa-solid fa-ellipsis-vertical toggle"></i>
-            </div>
-          </div>
+        <input type="checkbox" id="${task.index}" name="list${task.description}" value="list" />
+        <label for="list${task.description}">${task.description}</label>
+        </div>
+        <div class="toggleIcon">
+        <i id="${task.index}" class="fas fa-edit hideEdit"></i>
+        <i id="${task.index}"  class="fa-solid fa-trash-can hideDelete"></i>
+        <i id="${task.index}" class="fa-solid fa-ellipsis-vertical toggle"></i>
+        </div>
+      </div>
 
           `,
     );
@@ -161,17 +92,24 @@ const renderTask = () => {
 
     const moreBtn = document.querySelectorAll('.toggle');
     const deleteIcon = document.querySelectorAll('.hideDelete');
-    const here = (e) => {
+    const editIcon = document.querySelectorAll('.hideEdit');
+
+    const toggleMore = (e) => {
       if (e.target) {
-        deleteIcon.forEach((ic) => {
-          if (ic.id === e.target.id) {
-            ic.classList.toggle('showDelete');
+        deleteIcon.forEach((del) => {
+          if (del.id === e.target.id) {
+            del.classList.toggle('showDelete');
+          }
+        });
+        editIcon.forEach((edit) => {
+          if (edit.id === e.target.id) {
+            edit.classList.toggle('showEdit');
           }
         });
       }
     };
     moreBtn.forEach((more) => {
-      more.addEventListener('click', here);
+      more.addEventListener('click', toggleMore);
     });
 
     const handleDelete = (e) => {
@@ -188,40 +126,53 @@ const renderTask = () => {
     deleteIcon.forEach((icon) => {
       icon.addEventListener('click', handleDelete);
     });
+
+    editIcon.forEach((icon) => {
+      icon.addEventListener('click', handleEdit);
+    });
   }
 };
 
-// const toggleDele =() => {
-//   const moreIcon = document.querySelectorAll('.toggleIcon');
-//   if (moreIcon) {
-//     moreIcon.forEach((more) => {
-//       const toggleDele = more.querySelector('.toggle');
-//       const deleteIcon = more.querySelector('.hideDelete');
-//       toggleDele.addEventListener('click', () => {
-//         deleteIcon.classList.toggle('showDelete');
-//       });
+const handleEdit = (e) => {
+  const updateTaskByIndex = parseInt(e.target.id);
+  const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
 
-//       deleteIcon.addEventListener('click', (e) => {
-//         console.log(e.target.id);
-//         deleteTask(e.target.id);
-//       });
-//     });
-//   }
-// }
+  const findTaskToUpdate = storedTasks.find(
+    (tod) => tod.index === updateTaskByIndex,
+  );
 
-// // Example usage
-// loadFromLocalStorage(); // Load tasks from local storage
+  if (findTaskToUpdate) {
+    const newIndex = findTaskToUpdate.index;
 
-// addTask('Task 1');
-// addTask('Task 2');
-// addTask('Task 3');
-// console.log(toDoList);
+    const newUpdate = document.querySelector('.editTasks');
 
-// deleteTask(1);
-// console.log(toDoList);
+    newUpdate.innerHTML = `
+      <div class="addTaskInput">
+        <input type="text" class="taskInputNew" placeholder="Edit your task" value="${findTaskToUpdate.description}" />
+        <i class="fa-solid fa-arrows-rotate showEditmyTask"></i>
+        <i class="fa-sharp fa-solid fa-xmark cancel"></i>
+      </div>
+    `;
 
-// editTaskDescription(0, 'Updated Task 1');
-// console.log(toDoList);
+    const taskInputNew = document.querySelector('.taskInputNew');
+    const showEditmyTask = document.querySelector('.showEditmyTask');
+    const cancel = document.querySelector('.cancel');
+
+    const updateIt = () => {
+      const newDescription = taskInputNew.value;
+      console.log(newDescription);
+      editTaskDescription(newIndex, newDescription);
+      renderTask();
+    };
+
+    const resetUpdate = () => {
+      newUpdate.innerHTML = ''; // Remove the updated task input field and button
+    };
+
+    showEditmyTask.addEventListener('click', updateIt);
+    cancel.addEventListener('click', resetUpdate);
+  }
+};
 
 module.exports = {
   createTask,
@@ -231,4 +182,5 @@ module.exports = {
   loadFromLocalStorage,
   renderTask,
   saveToLocalStorage,
+  handleEdit,
 };

@@ -85,9 +85,8 @@ input::placeholder {
 .toggleIcon {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  width: 15%;
+  justify-content: end;
+  width: 25%;
 }
 
 .hideDelete {
@@ -96,6 +95,31 @@ input::placeholder {
 
 .showDelete {
   color: #f00;
+  display: flex;
+  margin-right: 0.5em;
+}
+
+.cancel {
+  color: #f00;
+}
+
+.hideEdit {
+  display: none;
+}
+
+.showEdit {
+  color: #002fff;
+  display: flex;
+  margin-right: 0.5em;
+}
+
+.hideAddTask,
+.editmyTask {
+  display: none;
+}
+
+.showEditmyTask {
+  color: #002fff;
   display: flex;
 }
 
