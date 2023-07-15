@@ -20,12 +20,12 @@ const deleteTask = (index) => {
   // Update the indexes of remaining tasks
   updateIndexes();
 
-  // eslint-disable-next-line no-use-before-define
   // Save changes to local storage
+  // eslint-disable-next-line no-use-before-define
   saveToLocalStorage();
 
-  // eslint-disable-next-line no-use-before-define
   // Re-render task
+  // eslint-disable-next-line no-use-before-define
   renderTask();
 };
 
