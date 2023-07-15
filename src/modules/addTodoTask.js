@@ -20,9 +20,11 @@ const deleteTask = (index) => {
   // Update the indexes of remaining tasks
   updateIndexes();
 
+  // eslint-disable-next-line no-use-before-define
   // Save changes to local storage
   saveToLocalStorage();
 
+  // eslint-disable-next-line no-use-before-define
   // Re-render task
   renderTask();
 };
@@ -93,7 +95,6 @@ const renderTask = () => {
       more.addEventListener('click', toggleMore);
     });
 
-    // eslint-disable-next-line no-use-before-define
     const handleDelete = (e) => {
       const taskId = parseInt(e.target.id, 10);
 
@@ -110,6 +111,7 @@ const renderTask = () => {
     });
 
     editIcon.forEach((icon) => {
+      // eslint-disable-next-line no-use-before-define
       icon.addEventListener('click', handleEdit);
     });
   }
