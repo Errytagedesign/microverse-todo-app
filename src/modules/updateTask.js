@@ -1,24 +1,4 @@
-export const handleCompleteTask = (id, check) => {
-  // const taskId = id;
-  // if (taskId) {
-  //   let storedTasks = JSON.parse(localStorage.getItem('toDoList'));
-
-  //   const taskIndex = storedTasks.findIndex((task) => task.index === taskId);
-
-  //   if (taskIndex !== -1) {
-  //     storedTasks = storedTasks.map((task, index) => {
-  //       if (index === taskIndex) {
-  //         return {
-  //           ...task,
-  //           completed: check.checked,
-  //         };
-  //       }
-  //       return task;
-  //     });
-
-  //     localStorage.setItem('toDoList', JSON.stringify(storedTasks));
-  //   }
-  // }
+const handleCompleteTask = (id, check) => {
   const taskId = parseInt(id, 10);
   if (taskId) {
     let storedTasks = JSON.parse(localStorage.getItem('toDoList'));
@@ -36,3 +16,13 @@ export const handleCompleteTask = (id, check) => {
     localStorage.setItem('toDoList', JSON.stringify(storedTasks));
   }
 };
+
+const clearCompletedTask = () => {
+  const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
+
+  const completedTask = storedTasks.filter((task) => !task.completed);
+
+  localStorage.setItem('toDoList', JSON.stringify(completedTask));
+};
+
+module.exports = { handleCompleteTask, clearCompletedTask };

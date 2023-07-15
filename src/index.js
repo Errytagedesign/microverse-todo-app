@@ -1,15 +1,15 @@
 /* eslint-disable no-plusplus */
 import './index.css';
-
+import { clearCompletedTask } from './modules/updateTask';
 import {
   createTask,
   updateIndexes,
   renderTask,
   saveToLocalStorage,
 } from './modules/addTodoTask.js';
-import handleCompleteTask from './modules/updateTask';
 
 const addTask = document.querySelector('.addTask');
+const clearTask = document.querySelector('.clear');
 
 addTask.addEventListener('click', () => {
   createTask();
@@ -18,15 +18,9 @@ addTask.addEventListener('click', () => {
   updateIndexes();
 });
 
+clearTask.addEventListener('click', () => {
+  clearCompletedTask();
+  renderTask();
+});
+
 window.addEventListener('DOMContentLoaded', renderTask);
-
-// window.addEventListener('DOMContentLoaded', () => {
-//   const taskContainer = document.querySelector('.todoList');
-
-//   taskContainer.addEventListener('change', (event) => {
-//     const check = event.target;
-//     if (check.classList.contains('completeTask')) {
-//       handleCompleteTask(check.id, check);
-//     }
-//   });
-// });

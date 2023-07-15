@@ -38,11 +38,6 @@ const saveToLocalStorage = () => {
 
 // Function to edit a task description
 const editTaskDescription = (taskId, newDescription) => {
-  // // Update the description of the task at the specified index
-  // toDoList[index].description = newDescription;
-
-  // // Save changes to local storage
-  // saveToLocalStorage();
   const taskToUpdate = toDoList.find((task) => task.index === taskId);
 
   if (taskToUpdate) {
@@ -93,7 +88,6 @@ const renderTask = () => {
     completeTasks.forEach((task) => {
       // Attach event listeners to all checkboxes
       task.addEventListener('change', (e) => {
-        console.log(task.getAttribute);
         completeTask(task.id, task);
       });
     });
