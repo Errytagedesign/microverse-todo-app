@@ -5,9 +5,25 @@ let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 
 // Function to update the indexes of tasks
 const updateIndexes = () => {
+  /* eslint-disable-next-line no-plusplus */
   for (let i = 0; i < toDoList.length; i++) {
     toDoList[i].index = i;
   }
+};
+
+// Function to delete a task
+const deleteTask = (index) => {
+  // Remove the task at the specified index
+  toDoList.splice(index, 1);
+
+  // Update the indexes of remaining tasks
+  updateIndexes();
+
+  // Save changes to local storage
+  saveToLocalStorage();
+
+  // Re-render task
+  renderTask();
 };
 
 // Function to save changes to local storage
@@ -29,47 +45,6 @@ const loadFromLocalStorage = () => {
   const storedTasks = localStorage.getItem('toDoList');
   if (storedTasks) {
     toDoList = JSON.parse(storedTasks);
-  }
-};
-
-const handleEdit = (e) => {
-  const updateTaskByIndex = parseInt(e.target.id);
-  const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
-
-  const findTaskToUpdate = storedTasks.find(
-    (tod) => tod.index === updateTaskByIndex,
-  );
-
-  if (findTaskToUpdate) {
-    const newIndex = findTaskToUpdate.index;
-
-    const newUpdate = document.querySelector('.editTasks');
-
-    newUpdate.innerHTML = `
-      <div class="addTaskInput">
-        <input type="text" class="taskInputNew" placeholder="Edit your task" value="${findTaskToUpdate.description}" />
-        <i class="fa-solid fa-arrows-rotate showEditmyTask"></i>
-        <i class="fa-sharp fa-solid fa-xmark cancel"></i>
-      </div>
-    `;
-
-    const taskInputNew = document.querySelector('.taskInputNew');
-    const showEditmyTask = document.querySelector('.showEditmyTask');
-    const cancel = document.querySelector('.cancel');
-
-    const updateIt = () => {
-      const newDescription = taskInputNew.value;
-      console.log(newDescription);
-      editTaskDescription(newIndex, newDescription);
-      renderTask();
-    };
-
-    const resetUpdate = () => {
-      newUpdate.innerHTML = ''; // Remove the updated task input field and button
-    };
-
-    showEditmyTask.addEventListener('click', updateIt);
-    cancel.addEventListener('click', resetUpdate);
   }
 };
 
@@ -118,7 +93,7 @@ const renderTask = () => {
     });
 
     const handleDelete = (e) => {
-      const taskId = parseInt(e.target.id);
+      const taskId = parseInt(e.target.id, 10);
 
       // Find the index of the task with the matching ID
       const taskIndex = toDoList.findIndex((task) => task.index === taskId);
@@ -135,6 +110,47 @@ const renderTask = () => {
     editIcon.forEach((icon) => {
       icon.addEventListener('click', handleEdit);
     });
+  }
+};
+
+const handleEdit = (e) => {
+  const updateTaskByIndex = parseInt(e.target.id, 10);
+  const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
+
+  const findTaskToUpdate = storedTasks.find(
+    (tod) => tod.index === updateTaskByIndex,
+  );
+
+  if (findTaskToUpdate) {
+    const newIndex = findTaskToUpdate.index;
+
+    const newUpdate = document.querySelector('.editTasks');
+
+    newUpdate.innerHTML = `
+      <div class="addTaskInput">
+        <input type="text" class="taskInputNew" placeholder="Edit your task" value="${findTaskToUpdate.description}" />
+        <i class="fa-solid fa-arrows-rotate showEditmyTask"></i>
+        <i class="fa-sharp fa-solid fa-xmark cancel"></i>
+      </div>
+    `;
+
+    const taskInputNew = document.querySelector('.taskInputNew');
+    const showEditmyTask = document.querySelector('.showEditmyTask');
+    const cancel = document.querySelector('.cancel');
+
+    const updateIt = () => {
+      const newDescription = taskInputNew.value;
+      console.log(newDescription);
+      editTaskDescription(newIndex, newDescription);
+      renderTask();
+    };
+
+    const resetUpdate = () => {
+      newUpdate.innerHTML = ''; // Remove the updated task input field and button
+    };
+
+    showEditmyTask.addEventListener('click', updateIt);
+    cancel.addEventListener('click', resetUpdate);
   }
 };
 
@@ -156,21 +172,6 @@ const createTask = (task) => {
   // Save changes to local storage
   saveToLocalStorage();
   inputList.value = '';
-  renderTask();
-};
-
-// Function to delete a task
-const deleteTask = (index) => {
-  // Remove the task at the specified index
-  toDoList.splice(index, 1);
-
-  // Update the indexes of remaining tasks
-  updateIndexes();
-
-  // Save changes to local storage
-  saveToLocalStorage();
-
-  // Re-render task
   renderTask();
 };
 
