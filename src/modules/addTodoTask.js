@@ -16,6 +16,7 @@ const deleteTask = (index) => {
   // Remove the task at the specified index
   toDoList.splice(index, 1);
 
+  // eslint-disable-next-line no-use-before-define
   // Update the indexes of remaining tasks
   updateIndexes();
 
@@ -92,6 +93,7 @@ const renderTask = () => {
       more.addEventListener('click', toggleMore);
     });
 
+    // eslint-disable-next-line no-use-before-define
     const handleDelete = (e) => {
       const taskId = parseInt(e.target.id, 10);
 
@@ -140,7 +142,6 @@ const handleEdit = (e) => {
 
     const updateIt = () => {
       const newDescription = taskInputNew.value;
-      console.log(newDescription);
       editTaskDescription(newIndex, newDescription);
       renderTask();
     };
