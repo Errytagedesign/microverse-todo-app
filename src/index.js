@@ -1,29 +1,20 @@
 /* eslint-disable no-plusplus */
 import './index.css';
 
-const displayList = document.querySelector('.todoList');
+import {
+  createTask,
+  updateIndexes,
+  renderTask,
+  saveToLocalStorage,
+} from './modules/addTodoTask.js';
 
-const toDoList = [
-  { description: 'Read About Express.js', completed: false, index: 1 },
-  { description: 'Clean the home office', completed: false, index: 2 },
-  { description: 'Complete 1000 steps walk', completed: true, index: 3 },
-];
+const addTask = document.querySelector('.addTask');
 
-const input = document.createElement('input');
-input.placeholder = 'Add your list';
-input.classList.add('input-design', 'design');
-displayList.insertAdjacentElement('afterbegin', input);
+addTask.addEventListener('click', () => {
+  createTask();
+  saveToLocalStorage();
+  renderTask();
+  updateIndexes();
+});
 
-for (let i = 0; i < toDoList.length; i++) {
-  console.log(toDoList[i].index);
-  displayList.innerHTML += `
- <div class="check-div design">
- <input type="checkbox" id="list${toDoList[i].index}" name="list${toDoList[i].description}" value="list">
- <label for="list${toDoList[i].description}">${toDoList[i].description}</label>
- </div>
- `;
-}
-const clear = document.createElement('p');
-clear.textContent = 'Clear all Do list project';
-clear.classList.add('clear');
-displayList.insertAdjacentElement('beforeend', clear);
+window.addEventListener('DOMContentLoaded', renderTask);

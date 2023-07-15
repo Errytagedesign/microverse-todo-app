@@ -3,12 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Microverse Todo-List App</title>
   </head>
   <body>
     <main class="todoContainer">
-      <header><h1 class="heading design">Today's Todo</h1></header>
+      <header class="">
+        <h1>Today's Todo</h1>
+        <i class="fa-solid fa-arrows-rotate icon1"></i>
+      </header>
+
+      <div class="addTaskInput">
+        <input type="text" class="taskInput" placeholder="Add your list" />
+
+        <div>
+          <i class="fa-solid fa-arrow-turn-down fa-rotate-90 addTask"></i>
+        </div>
+      </div>
+
       <ul class="todoList"></ul>
+      <button class="clear">Clear all Do list project</button>
+
+      <div class="editTasks"></div>
     </main>
   </body>
 </html>
