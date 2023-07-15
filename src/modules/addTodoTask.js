@@ -61,12 +61,10 @@ const renderTask = () => {
   if (storedTasks && storedTasks.length > 0) {
     const showTask = storedTasks.map(
       (task) => ` <div  class="todos">
-     <div id="${task.index}" class="check-div design">
-        <input class="completeTask" type="checkbox" id="${
-          task.index
-        }" name="list${task.description}" value="list" ${
-        task.completed ? 'checked' : ''
-      }  />
+        <div id="${task.index}" class="check-div design">
+        <input class="completeTask" type="checkbox" id="${task.index}"
+        name="list${task.description}" value="list"
+        ${task.completed ? 'checked' : ''}  />
         <label for="list${task.description}">${task.description}</label>
         </div>
         <div class="toggleIcon">
@@ -87,7 +85,8 @@ const renderTask = () => {
 
     completeTasks.forEach((task) => {
       // Attach event listeners to all checkboxes
-      task.addEventListener('change', (e) => {
+      task.addEventListener('change', () => {
+        // eslint-disable-next-line no-use-before-define
         completeTask(task.id, task);
       });
     });
@@ -134,7 +133,6 @@ const renderTask = () => {
 
 const completeTask = (id, task) => {
   handleCompleteTask(id, task);
-  // renderTask();
 };
 
 const handleEdit = (e) => {
