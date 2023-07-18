@@ -1,3 +1,5 @@
+const { handleCompleteTask } = require('./updateTask');
+
 const displayList = document.querySelector('.todoList');
 
 // Initialize the to-do list array
@@ -7,7 +9,7 @@ let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 const updateIndexes = () => {
   /* eslint-disable-next-line no-plusplus */
   for (let i = 0; i < toDoList.length; i++) {
-    toDoList[i].index = i;
+    toDoList[i].index = i + 1;
   }
 };
 
@@ -35,12 +37,13 @@ const saveToLocalStorage = () => {
 };
 
 // Function to edit a task description
-const editTaskDescription = (index, newDescription) => {
-  // Update the description of the task at the specified index
-  toDoList[index].description = newDescription;
+const editTaskDescription = (taskId, newDescription) => {
+  const taskToUpdate = toDoList.find((task) => task.index === taskId);
 
-  // Save changes to local storage
-  saveToLocalStorage();
+  if (taskToUpdate) {
+    taskToUpdate.description = newDescription;
+    saveToLocalStorage();
+  }
 };
 
 // Load tasks from local storage (if available)
@@ -58,8 +61,10 @@ const renderTask = () => {
   if (storedTasks && storedTasks.length > 0) {
     const showTask = storedTasks.map(
       (task) => ` <div  class="todos">
-     <div class="check-div design">
-        <input type="checkbox" id="${task.index}" name="list${task.description}" value="list" />
+        <div id="${task.index}" class="check-div design">
+        <input class="completeTask" type="checkbox" id="${task.index}"
+        name="list${task.description}" value="list"
+        ${task.completed ? 'checked' : ''}  />
         <label for="list${task.description}">${task.description}</label>
         </div>
         <div class="toggleIcon">
@@ -76,6 +81,15 @@ const renderTask = () => {
     const moreBtn = document.querySelectorAll('.toggle');
     const deleteIcon = document.querySelectorAll('.hideDelete');
     const editIcon = document.querySelectorAll('.hideEdit');
+    const completeTasks = document.querySelectorAll('.completeTask');
+
+    completeTasks.forEach((task) => {
+      // Attach event listeners to all checkboxes
+      task.addEventListener('change', () => {
+        // eslint-disable-next-line no-use-before-define
+        completeTask(task.id, task);
+      });
+    });
 
     const toggleMore = (e) => {
       if (e.target) {
@@ -115,6 +129,10 @@ const renderTask = () => {
       icon.addEventListener('click', handleEdit);
     });
   }
+};
+
+const completeTask = (id, task) => {
+  handleCompleteTask(id, task);
 };
 
 const handleEdit = (e) => {
@@ -166,7 +184,7 @@ const createTask = (task) => {
     task,
     description: inputValue,
     completed: false,
-    index: toDoList.length,
+    index: toDoList.length + 1,
   };
 
   // Add the new task to the array
