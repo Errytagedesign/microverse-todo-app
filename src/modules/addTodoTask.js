@@ -16,14 +16,6 @@ const deleteTask = (toDoList, index) => {
   toDoList.splice(index, 1);
 };
 
-// Load tasks from local storage (if available)
-const loadFromLocalStorage = (toDoList) => {
-  const storedTasks = localStorage.getItem('toDoList');
-  if (storedTasks) {
-    toDoList = JSON.parse(storedTasks);
-  }
-};
-
 // Render Task to window
 const renderTask = () => {
   const displayList = document.querySelector('.todoList');
@@ -83,13 +75,14 @@ const renderTask = () => {
 
     deleteIcon.forEach((icon) => {
       icon.addEventListener('click', () => {
+        // eslint-disable-next-line no-use-before-define
         handleDelete(icon.id, storedTasks);
       });
     });
 
     editIcon.forEach((icon) => {
-      // eslint-disable-next-line no-use-before-define
       icon.addEventListener('click', () => {
+        // eslint-disable-next-line no-use-before-define
         handleEdit(icon.id, storedTasks);
       });
     });
@@ -97,7 +90,7 @@ const renderTask = () => {
 };
 
 const handleDelete = (id, store) => {
-  const taskId = parseInt(id);
+  const taskId = parseInt(id, 10);
 
   // Find the index of the task with the matching ID
   const taskIndex = store.findIndex((task) => task.index === taskId);
@@ -115,7 +108,7 @@ const completeTask = (id, task) => {
 };
 
 const handleEdit = (id, store) => {
-  const updateTaskByIndex = parseInt(id);
+  const updateTaskByIndex = parseInt(id, 10);
 
   const findTaskToUpdate = store.find((tod) => tod.index === updateTaskByIndex);
 
@@ -151,32 +144,9 @@ const handleEdit = (id, store) => {
   }
 };
 
-// // Function to add a new task
-// const createTask = (toDoList, task) => {
-//   // Create a new task object
-//   const inputList = document.querySelector('.taskInput');
-//   const inputValue = inputList.value.trim();
-//   const newTask = {
-//     task,
-//     description: inputValue,
-//     completed: false,
-//     index: toDoList.length + 1,
-//   };
-
-//   // Add the new task to the array
-//   toDoList.push(newTask);
-//   console.log(toDoList);
-
-//   // Save changes to local storage
-//   saveToLocalStorage(toDoList);
-//   inputList.value = '';
-//   renderTask();
-// };
-
 module.exports = {
   deleteTask,
   updateIndexes,
-  loadFromLocalStorage,
   renderTask,
   saveToLocalStorage,
   handleEdit,
