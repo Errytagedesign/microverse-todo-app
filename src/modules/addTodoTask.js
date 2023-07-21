@@ -1,12 +1,9 @@
 const { handleCompleteTask } = require('./updateTask');
-
-const displayList = document.querySelector('.todoList');
-
-// Initialize the to-do list array
-let toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
+const { editTaskDescription } = require('./editTask');
+const { saveToLocalStorage } = require('./saveToLocalstorage');
 
 // Function to update the indexes of tasks
-const updateIndexes = () => {
+const updateIndexes = (toDoList) => {
   /* eslint-disable-next-line no-plusplus */
   for (let i = 0; i < toDoList.length; i++) {
     toDoList[i].index = i + 1;
@@ -14,40 +11,13 @@ const updateIndexes = () => {
 };
 
 // Function to delete a task
-const deleteTask = (index) => {
+const deleteTask = (toDoList, index) => {
   // Remove the task at the specified index
   toDoList.splice(index, 1);
-
-  // eslint-disable-next-line no-use-before-define
-  // Update the indexes of remaining tasks
-  updateIndexes();
-
-  // Save changes to local storage
-  // eslint-disable-next-line no-use-before-define
-  saveToLocalStorage();
-
-  // Re-render task
-  // eslint-disable-next-line no-use-before-define
-  renderTask();
-};
-
-// Function to save changes to local storage
-const saveToLocalStorage = () => {
-  localStorage.setItem('toDoList', JSON.stringify(toDoList));
-};
-
-// Function to edit a task description
-const editTaskDescription = (taskId, newDescription) => {
-  const taskToUpdate = toDoList.find((task) => task.index === taskId);
-
-  if (taskToUpdate) {
-    taskToUpdate.description = newDescription;
-    saveToLocalStorage();
-  }
 };
 
 // Load tasks from local storage (if available)
-const loadFromLocalStorage = () => {
+const loadFromLocalStorage = (toDoList) => {
   const storedTasks = localStorage.getItem('toDoList');
   if (storedTasks) {
     toDoList = JSON.parse(storedTasks);
@@ -56,11 +26,13 @@ const loadFromLocalStorage = () => {
 
 // Render Task to window
 const renderTask = () => {
+  const displayList = document.querySelector('.todoList');
+
   const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
 
   if (storedTasks && storedTasks.length > 0) {
     const showTask = storedTasks.map(
-      (task) => ` <div  class="todos">
+      (task) => ` <li  class="todos">
         <div id="${task.index}" class="check-div design">
         <input class="completeTask" type="checkbox" id="${task.index}"
         name="list${task.description}" value="list"
@@ -72,7 +44,7 @@ const renderTask = () => {
         <i id="${task.index}"  class="fa-solid fa-trash-can hideDelete"></i>
         <i id="${task.index}" class="fa-solid fa-ellipsis-vertical toggle"></i>
         </div>
-      </div>
+      </li>
 
           `,
     );
@@ -109,39 +81,43 @@ const renderTask = () => {
       more.addEventListener('click', toggleMore);
     });
 
-    const handleDelete = (e) => {
-      const taskId = parseInt(e.target.id, 10);
-
-      // Find the index of the task with the matching ID
-      const taskIndex = toDoList.findIndex((task) => task.index === taskId);
-
-      if (taskIndex !== -1) {
-        deleteTask(taskIndex);
-      }
-    };
-
     deleteIcon.forEach((icon) => {
-      icon.addEventListener('click', handleDelete);
+      icon.addEventListener('click', () => {
+        handleDelete(icon.id, storedTasks);
+      });
     });
 
     editIcon.forEach((icon) => {
       // eslint-disable-next-line no-use-before-define
-      icon.addEventListener('click', handleEdit);
+      icon.addEventListener('click', () => {
+        handleEdit(icon.id, storedTasks);
+      });
     });
   }
+};
+
+const handleDelete = (id, store) => {
+  const taskId = parseInt(id);
+
+  // Find the index of the task with the matching ID
+  const taskIndex = store.findIndex((task) => task.index === taskId);
+
+  if (taskIndex !== -1) {
+    deleteTask(store, taskIndex);
+  }
+  updateIndexes(store);
+  saveToLocalStorage(store);
+  renderTask();
 };
 
 const completeTask = (id, task) => {
   handleCompleteTask(id, task);
 };
 
-const handleEdit = (e) => {
-  const updateTaskByIndex = parseInt(e.target.id, 10);
-  const storedTasks = JSON.parse(localStorage.getItem('toDoList'));
+const handleEdit = (id, store) => {
+  const updateTaskByIndex = parseInt(id);
 
-  const findTaskToUpdate = storedTasks.find(
-    (tod) => tod.index === updateTaskByIndex,
-  );
+  const findTaskToUpdate = store.find((tod) => tod.index === updateTaskByIndex);
 
   if (findTaskToUpdate) {
     const newIndex = findTaskToUpdate.index;
@@ -162,7 +138,7 @@ const handleEdit = (e) => {
 
     const updateIt = () => {
       const newDescription = taskInputNew.value;
-      editTaskDescription(newIndex, newDescription);
+      editTaskDescription(store, newIndex, newDescription);
       renderTask();
     };
 
@@ -175,32 +151,31 @@ const handleEdit = (e) => {
   }
 };
 
-// Function to add a new task
-const createTask = (task) => {
-  // Create a new task object
-  const inputList = document.querySelector('.taskInput');
-  const inputValue = inputList.value.trim();
-  const newTask = {
-    task,
-    description: inputValue,
-    completed: false,
-    index: toDoList.length + 1,
-  };
+// // Function to add a new task
+// const createTask = (toDoList, task) => {
+//   // Create a new task object
+//   const inputList = document.querySelector('.taskInput');
+//   const inputValue = inputList.value.trim();
+//   const newTask = {
+//     task,
+//     description: inputValue,
+//     completed: false,
+//     index: toDoList.length + 1,
+//   };
 
-  // Add the new task to the array
-  toDoList.push(newTask);
+//   // Add the new task to the array
+//   toDoList.push(newTask);
+//   console.log(toDoList);
 
-  // Save changes to local storage
-  saveToLocalStorage();
-  inputList.value = '';
-  renderTask();
-};
+//   // Save changes to local storage
+//   saveToLocalStorage(toDoList);
+//   inputList.value = '';
+//   renderTask();
+// };
 
 module.exports = {
-  createTask,
   deleteTask,
   updateIndexes,
-  editTaskDescription,
   loadFromLocalStorage,
   renderTask,
   saveToLocalStorage,
