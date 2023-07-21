@@ -93,4 +93,15 @@ describe('clearCompletedTask function', () => {
       { index: 2, description: 'Task 2', completed: false },
     ]);
   });
+
+  test('should remove the task at the end of the array', () => {
+    // Call the function to remove the last task
+    deleteTask(taskStorage, taskStorage.length - 1);
+
+    // Assertions
+    expect(taskStorage).toEqual([
+      { description: 'Task 1', completed: false, index: 1 },
+      { description: 'Task 2', completed: false, index: 2 },
+    ]);
+  });
 });
