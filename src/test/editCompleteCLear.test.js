@@ -45,7 +45,6 @@ describe('handleCompleteTask function', () => {
 
   test('should update the "completed" status of a task in localStorage', () => {
     // Mock data
-    const taskId = 1;
     const initialTask = {
       index: 1,
       description: 'Initial description',

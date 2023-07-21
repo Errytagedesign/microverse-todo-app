@@ -54,6 +54,7 @@ A Todo list project developed with webpack and the best combo of HTML,CSS and JA
 - Add Linters.
 - Add Webpack config.
 - Add addnRemove.test.js file
+- Add editCompleteClear.test.js file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -135,10 +136,7 @@ I have added the linters or tests in order to avoid anykind of typos and ensure 
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] Add editTask.test.js file
-- [ ] Add test functionality to test editTask function
-- [ ] Add test functionality to test complete task function
-- [ ] Add test functionality to test clear completed task function
+- [ ] Add test functionality to test render task function
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
