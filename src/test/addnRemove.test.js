@@ -18,7 +18,8 @@ describe('createTask function', () => {
     createTask(inputList, taskStorage);
 
     // Assertions
-    expect(taskStorage).toEqual([itemToAdd]); // Check if the new task is added to the taskStorage array
+    // Check if the new task is added to the taskStorage array
+    expect(taskStorage).toEqual([itemToAdd]);
   });
 
   test('should add multiple items to taskStorage array', () => {
@@ -101,7 +102,7 @@ describe('deleteTask function', () => {
     ]);
   });
 
-    test('should remove the task at the end of the array', () => {
+  test('should remove the task at the end of the array', () => {
     // Call the function to remove the last task
     deleteTask(taskStorage, taskStorage.length - 1);
 
