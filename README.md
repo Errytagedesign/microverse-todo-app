@@ -53,6 +53,7 @@ A Todo list project developed with webpack and the best combo of HTML,CSS and JA
 - Add index.css file.
 - Add Linters.
 - Add Webpack config.
+- Add addnRemove.test.js file
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,7 +135,10 @@ I have added the linters or tests in order to avoid anykind of typos and ensure 
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] Add Funtionalities
+- [ ] Add editTask.test.js file
+- [ ] Add test functionality to test editTask function
+- [ ] Add test functionality to test complete task function
+- [ ] Add test functionality to test clear completed task function
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

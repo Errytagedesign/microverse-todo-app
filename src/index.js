@@ -1,21 +1,22 @@
 /* eslint-disable no-plusplus */
 import './index.css';
 import { clearCompletedTask } from './modules/updateTask';
-import {
-  createTask,
-  updateIndexes,
-  renderTask,
-  saveToLocalStorage,
-} from './modules/addTodoTask.js';
+import { updateIndexes, renderTask } from './modules/addTodoTask.js';
+import { createTask } from './modules/addTask';
+import { saveToLocalStorage } from './modules/saveToLocalstorage';
 
 const addTask = document.querySelector('.addTask');
 const clearTask = document.querySelector('.clear');
+const inputList = document.querySelector('.taskInput');
+
+// Initialize the to-do list array
+const toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
 
 addTask.addEventListener('click', () => {
-  createTask();
-  saveToLocalStorage();
+  createTask(inputList, toDoList);
+  saveToLocalStorage(toDoList);
   renderTask();
-  updateIndexes();
+  updateIndexes(toDoList);
 });
 
 clearTask.addEventListener('click', () => {
