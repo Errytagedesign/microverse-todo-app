@@ -100,4 +100,6 @@ describe('deleteTask function', () => {
       { description: 'Task 3', completed: false, index: 3 },
     ]);
   });
+
+  //   Okari
 });
