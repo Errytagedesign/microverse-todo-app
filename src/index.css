@@ -129,4 +129,10 @@ input::placeholder {
   background: #e8e8e8;
   font-size: 1.2rem;
   padding: 0.5em;
+  cursor: pointer;
+}
+
+.clear:hover {
+  background: #f00;
+  color: #fff;
 }
